@@ -1,6 +1,6 @@
 package io.github.elkhoudiry.klogger.server.core
 
-sealed interface Result<T>{
+sealed interface Result<T> {
 
     data class Success<T>(val data: T) : Result<T>
 

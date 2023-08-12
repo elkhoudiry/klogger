@@ -1,8 +1,19 @@
 [versions]
+androidCompileSdk = "33"
+androidGradlePlugin = "8.0.1"
+androidMinSdk = "23"
+androidTargetSdk = "33"
+androidxAnnotation = "1.6.0"
+androidxAppcombat = "1.6.1"
+androidxCore = "1.9.0"
+androidxTestCoreKtx = "1.5.0"
+androidxTestRules = "1.5.0"
+androidxTestRunner = "1.5.2"
 auth0Mvc = "1.10.0"
 cassandraMigration = "2.5.0_v4"
+googlePlayServicesGradlePlugin = "4.3.15"
 javaxServerletApi = "3.1.0"
-javaCompatibility = "8"
+javaCompatibility = "17"
 ktorServer = "2.3.2"
 kotlin = "1.8.20"
 kotlinxCoroutines = "1.7.0-Beta"
@@ -10,17 +21,31 @@ kotlinxDateTime = "0.4.0"
 kotlinxSerialization = "1.5.0"
 ktlintGradlePlugin = "11.3.1"
 logback = "1.2.11"
+multiplatformUuid = "0.7.0"
 realtimeCassandra = "0.0.2"
+sqldelight = "2.0.0-alpha05"
 
 [libraries]
+android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin"}
+
+androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "androidxAnnotation" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppcombat" }
+androidx-core = { group = "androidx.core", name = "core", version.ref = "androidxCore" }
+androidx-test-core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "androidxTestCoreKtx" }
+androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidxTestRules" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref ="androidxTestRunner" }
+
 auth0-mvc = { group = "com.auth0", name = "mvc-auth-commons", version.ref = "auth0Mvc" }
 
 cassandra-migration = { group = "org.cognitor.cassandra", name = "cassandra-migration", version.ref = "cassandraMigration" }
 ch-qos-logback = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
 
+google-play-services-gradle-plugin = { group = "com.google.gms", name = "google-services", version.ref = "googlePlayServicesGradlePlugin" }
+
 javax-servlet-api = { group = "javax.servlet", name = "javax.servlet-api", version.ref = "javaxServerletApi" }
 
 kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-serialization-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-serialization", version.ref = "kotlin" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
 
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
@@ -47,13 +72,22 @@ ktor-server-tests-jvm = { group = "io.ktor", name = "ktor-server-tests-jvm", ver
 ktor-server-content-negotiation-jvm = { group = "io.ktor", name = "ktor-server-content-negotiation-jvm", version.ref = "ktorServer" }
 ktor-serialization-kotlinx-json-jvm = { group = "io.ktor", name = "ktor-serialization-kotlinx-json-jvm", version.ref = "ktorServer" }
 
+multiplatform-uuid = { group = "com.benasher44", name = "uuid", version.ref = "multiplatformUuid" }
+
 realtime-cassandra = { group = "io.github.elkhoudiry", name = "realtime-cassandra", version.ref = "realtimeCassandra" }
 realtime-cassandra-jvm = { group = "io.github.elkhoudiry", name = "realtime-cassandra-jvm", version.ref = "realtimeCassandra" }
 
+sqldelight-android-driver = { group = "app.cash.sqldelight", name = "android-driver", version.ref = "sqldelight" }
+sqldelight-gradle-plugin = { group = "app.cash.sqldelight", name = "gradle-plugin", version.ref = "sqldelight" }
+sqldelight-runtime = { group = "app.cash.sqldelight", name = "runtime", version.ref = "sqldelight" }
+sqldelight-sqlite-driver = { group = "app.cash.sqldelight", name = "sqlite-driver", version.ref = "sqldelight" }
+
 [plugins]
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+google-play-services = { id = "com.google.gms.google-services", version.ref = "googlePlayServicesGradlePlugin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-
 ktlint-gradle = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradlePlugin" }
-
 ktor = { id = "io.ktor.plugin", version.ref = "ktorServer" }
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }

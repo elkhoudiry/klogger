@@ -6,8 +6,7 @@ import io.github.elkhoudiry.klogger.server.plugins.configureRouting
 import io.github.elkhoudiry.klogger.server.plugins.configureSerialization
 import io.ktor.server.application.Application
 import io.ktor.server.engine.embeddedServer
-import io.ktor.server.jetty.*
-import io.ktor.server.request.RequestAlreadyConsumedException
+import io.ktor.server.jetty.Jetty
 
 fun main() {
     val hostname = System.getenv("SERVER_HOSTNAME") ?: "localhost"

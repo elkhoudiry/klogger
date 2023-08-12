@@ -1,9 +1,9 @@
 package io.github.elkhoudiry.klogger.server.core
 
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.request.httpMethod
+import io.ktor.server.response.respond
 import kotlinx.datetime.Clock
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
@@ -22,6 +22,6 @@ suspend fun ApplicationCall.errorResponse(
             put("message", message ?: "No error message provided.")
             put("method", request.httpMethod.value)
             put("url", url)
-        },
+        }
     )
 }

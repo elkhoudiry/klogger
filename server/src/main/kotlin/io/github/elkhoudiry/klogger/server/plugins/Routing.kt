@@ -3,11 +3,15 @@ package io.github.elkhoudiry.klogger.server.plugins
 import io.github.elkhoudiry.klogger.server.core.ResponseException
 import io.github.elkhoudiry.klogger.server.core.errorResponse
 import io.github.elkhoudiry.klogger.server.routes.health.health
-import io.ktor.server.application.*
-import io.ktor.server.plugins.statuspages.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import io.ktor.server.application.Application
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.application.call
+import io.ktor.server.application.install
+import io.ktor.server.plugins.statuspages.StatusPages
+import io.ktor.server.request.uri
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.get
+import io.ktor.server.routing.routing
 import io.netty.handler.codec.http.HttpResponseStatus
 
 fun Application.configureRouting() {
@@ -25,7 +29,7 @@ private suspend fun ApplicationCall.fail(failure: Throwable) = when (failure) {
             HttpResponseStatus.BAD_REQUEST.code(),
             failure,
             failure.technicalMessage,
-            this.request.uri,
+            this.request.uri
         )
     }
 
@@ -34,7 +38,7 @@ private suspend fun ApplicationCall.fail(failure: Throwable) = when (failure) {
             HttpResponseStatus.BAD_REQUEST.code(),
             failure,
             failure.message,
-            this.request.uri,
+            this.request.uri
         )
     }
 }

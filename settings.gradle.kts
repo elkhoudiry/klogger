@@ -1,5 +1,7 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
+        google()
         mavenCentral()
         gradlePluginPortal()
     }
@@ -7,6 +9,7 @@ pluginManagement {
 
 dependencyResolutionManagement {
     repositories {
+        google()
         mavenCentral()
     }
     versionCatalogs {
@@ -19,3 +22,12 @@ dependencyResolutionManagement {
 rootProject.name = "klogger"
 
 include(":server")
+
+include(":core-caching-sqldelight")
+project(":core-caching-sqldelight").projectDir = file("core/caching/sqldelight")
+
+include(":core-caching-sqldelight-test")
+project(":core-caching-sqldelight-test").projectDir = file("core/caching/sqldelight-test")
+
+include(":core-shared")
+project(":core-shared").projectDir = file("core/shared")

@@ -9,16 +9,16 @@ open class ResponseException(
 class InvalidBodyException(
     technicalMessage: String,
     friendlyMessage: String,
-    cause: Exception,
+    cause: Exception
 ) : ResponseException(friendlyMessage = friendlyMessage, technicalMessage = technicalMessage, cause = cause)
 
 class MissingPropertyException(
     property: String,
-    friendlyMessage: String? = null,
+    friendlyMessage: String? = null
 ) : ResponseException(
-    technicalMessage =  "Property $property is missing.",
+    technicalMessage = "Property $property is missing.",
     friendlyMessage = friendlyMessage ?: "Property $property is missing.",
-    cause = Exception("Property $property is missing."),
+    cause = Exception("Property $property is missing.")
 )
 
 fun missingProperty(property: String): Nothing = throw MissingPropertyException(property)
