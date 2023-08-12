@@ -12,6 +12,9 @@ application {
 }
 
 dependencies {
+    implementation(project(":core-server"))
+    implementation(project(":core-shared"))
+
     implementation(klogger.ch.qos.logback)
     implementation(klogger.kotlinx.datetime)
     implementation(klogger.kotlinx.serialization.json)

@@ -4,7 +4,3 @@ plugins {
     id("jvm.target.library")
     id("ios.target.library")
 }
-
-commonDependencies {
-    implementation(klogger.multiplatform.uuid)
-}

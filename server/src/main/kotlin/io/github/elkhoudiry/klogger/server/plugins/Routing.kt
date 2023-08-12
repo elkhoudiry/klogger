@@ -1,6 +1,6 @@
 package io.github.elkhoudiry.klogger.server.plugins
 
-import io.github.elkhoudiry.klogger.server.core.ResponseException
+import io.github.elkhoudiry.klogger.core.server.models.ResponseException
 import io.github.elkhoudiry.klogger.server.core.errorResponse
 import io.github.elkhoudiry.klogger.server.routes.health.health
 import io.ktor.server.application.Application
@@ -16,6 +16,7 @@ import io.netty.handler.codec.http.HttpResponseStatus
 
 fun Application.configureRouting() {
     val apiBase = "/api/v1"
+
     install(StatusPages) { exception<Throwable> { call, cause -> call.fail(cause) } }
     routing {
         get("/") { call.respondText("Hello World!") }

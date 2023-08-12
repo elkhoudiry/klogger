@@ -23,6 +23,7 @@ class CommonModuleConventionPlugin : Plugin<Project> {
             implementation(catalog.library("kotlinx.coroutines.core"))
             implementation(catalog.library("kotlinx.serialization.json"))
             implementation(catalog.library("kotlinx.datetime"))
+            implementation(catalog.library("multiplatform.uuid"))
         }
 
         commonTest.dependencies {
