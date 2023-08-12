@@ -14,6 +14,7 @@ application {
 dependencies {
     implementation(project(":core-server"))
     implementation(project(":core-shared"))
+    implementation(project(":route-health"))
 
     implementation(klogger.ch.qos.logback)
     implementation(klogger.kotlinx.datetime)

@@ -53,5 +53,9 @@ gradlePlugin {
             id = "sqldelight.module"
             implementationClass = "SQLDelightConventionPlugin"
         }
+        register("serverRouteModule") {
+            id = "server.route.module"
+            implementationClass = "ServerRouteConventionPlugin"
+        }
     }
 }

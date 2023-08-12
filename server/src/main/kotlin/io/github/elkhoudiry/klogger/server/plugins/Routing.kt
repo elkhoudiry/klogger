@@ -1,8 +1,8 @@
 package io.github.elkhoudiry.klogger.server.plugins
 
 import io.github.elkhoudiry.klogger.core.server.models.ResponseException
+import io.github.elkhoudiry.klogger.route.health.health
 import io.github.elkhoudiry.klogger.server.core.errorResponse
-import io.github.elkhoudiry.klogger.server.routes.health.health
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.call
