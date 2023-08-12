@@ -30,7 +30,6 @@ private suspend fun ApplicationCall.fail(failure: Throwable) = when (failure) {
             HttpResponseStatus.BAD_REQUEST.code(),
             failure,
             failure.technicalMessage,
-            this.request.uri
         )
     }
 
@@ -39,7 +38,6 @@ private suspend fun ApplicationCall.fail(failure: Throwable) = when (failure) {
             HttpResponseStatus.BAD_REQUEST.code(),
             failure,
             failure.message,
-            this.request.uri
         )
     }
 }
