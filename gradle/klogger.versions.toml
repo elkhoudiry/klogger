@@ -1,0 +1,59 @@
+[versions]
+auth0Mvc = "1.10.0"
+cassandraMigration = "2.5.0_v4"
+javaxServerletApi = "3.1.0"
+javaCompatibility = "8"
+ktorServer = "2.3.2"
+kotlin = "1.8.20"
+kotlinxCoroutines = "1.7.0-Beta"
+kotlinxDateTime = "0.4.0"
+kotlinxSerialization = "1.5.0"
+ktlintGradlePlugin = "11.3.1"
+logback = "1.2.11"
+realtimeCassandra = "0.0.2"
+
+[libraries]
+auth0-mvc = { group = "com.auth0", name = "mvc-auth-commons", version.ref = "auth0Mvc" }
+
+cassandra-migration = { group = "org.cognitor.cassandra", name = "cassandra-migration", version.ref = "cassandraMigration" }
+ch-qos-logback = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
+
+javax-servlet-api = { group = "javax.servlet", name = "javax.servlet-api", version.ref = "javaxServerletApi" }
+
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
+
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDateTime" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+
+ktor-client-core-jvm = { group = "io.ktor", name = "ktor-client-core-jvm", version.ref = "ktorServer" }
+ktor-client-java-jvm = { group = "io.ktor", name = "ktor-client-java-jvm", version.ref = "ktorServer" }
+
+ktor-server-call-id-jvm = { group = "io.ktor", name = "ktor-server-call-id-jvm", version.ref = "ktorServer" }
+ktor-server-CIO-jvm = { group = "io.ktor", name = "ktor-server-cio-jvm", version.ref = "ktorServer" }
+ktor-server-Jetty-jvm = { group = "io.ktor", name = "ktor-server-jetty-jvm", version.ref = "ktorServer" }
+ktor-server-call-logging-jvm = { group = "io.ktor", name = "ktor-server-call-logging-jvm", version.ref = "ktorServer" }
+ktor-server-compression-jvm = { group = "io.ktor", name = "ktor-server-compression-jvm", version.ref = "ktorServer" }
+ktor-server-core-jvm = { group = "io.ktor", name = "ktor-server-core-jvm", version.ref = "ktorServer" }
+ktor-server-default-headers-jvm = { group = "io.ktor", name = "ktor-server-default-headers-jvm", version.ref = "ktorServer" }
+ktor-server-host-common-jvm = { group = "io.ktor", name = "ktor-server-host-common-jvm", version.ref = "ktorServer" }
+ktor-server-netty-jvm = { group = "io.ktor", name = "ktor-server-netty-jvm", version.ref = "ktorServer" }
+ktor-server-status-pages-jvm = { group = "io.ktor", name = "ktor-server-status-pages-jvm", version.ref = "ktorServer" }
+ktor-server-tests-jvm = { group = "io.ktor", name = "ktor-server-tests-jvm", version.ref = "ktorServer" }
+
+ktor-server-content-negotiation-jvm = { group = "io.ktor", name = "ktor-server-content-negotiation-jvm", version.ref = "ktorServer" }
+ktor-serialization-kotlinx-json-jvm = { group = "io.ktor", name = "ktor-serialization-kotlinx-json-jvm", version.ref = "ktorServer" }
+
+realtime-cassandra = { group = "io.github.elkhoudiry", name = "realtime-cassandra", version.ref = "realtimeCassandra" }
+realtime-cassandra-jvm = { group = "io.github.elkhoudiry", name = "realtime-cassandra-jvm", version.ref = "realtimeCassandra" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+ktlint-gradle = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradlePlugin" }
+
+ktor = { id = "io.ktor.plugin", version.ref = "ktorServer" }

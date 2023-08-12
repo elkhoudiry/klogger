@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  cassandra-seed:
+    image: cassandra:3.7
+    ports:
+    - "9042:9042"
+    volumes:
+        - "cassandra_node_dev_1:/var/lib/cassandra"
+    environment:
+      - "CASSANDRA_SEEDS=cassandra-seed"
+      - "CASSANDRA_CLUSTER_NAME=Vennsocial"
+      - "CASSANDRA_DC=datacenter1"
+      - "CASSANDRA_ENDPOINT_SNITCH=se1"
+
+volumes:
+  cassandra_node_dev_1:
