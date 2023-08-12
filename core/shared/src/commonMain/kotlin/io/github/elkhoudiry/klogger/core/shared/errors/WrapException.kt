@@ -1,22 +1,24 @@
 package io.github.elkhoudiry.klogger.core.shared.errors
 
+import io.github.elkhoudiry.klogger.core.shared.message.Message
+import io.github.elkhoudiry.klogger.core.shared.message.message
 import io.github.elkhoudiry.klogger.core.shared.platform.Platform
 import io.github.elkhoudiry.klogger.core.shared.platform.Platform.exceptionLocation
-import io.github.elkhoudiry.klogger.core.shared.status.models.Message
 
-inline fun Exception.toError(details: Array<String>): Throw {
+inline fun Exception.toError(message: Message? = null, details: Map<String, Any>): Throw {
     return when (this) {
-        is Throw.Info -> this
-        is Throw.Critical -> this.regression(
+        is InfoThrow -> this
+        is CriticalThrow -> this.regression(
             location = Platform.executeLocation(),
-            details = details
-        )
-        else -> Throw.Critical.UnExpected(
-            callSite = Platform.executeLocation(),
             details = details,
-            message = Message.fromString(
-                this.message ?: ("Error message not found")
-            )
+            message = message ?: message(this.message),
+            cause = this
+        )
+        else -> CriticalThrow(
+            callLocation = Platform.executeLocation(),
+            details = details.toMap(),
+            message = message ?: message(this.message),
+            cause = this
         )
     }
 }

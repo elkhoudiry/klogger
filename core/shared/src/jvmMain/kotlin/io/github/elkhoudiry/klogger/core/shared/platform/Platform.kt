@@ -27,11 +27,7 @@ actual object Platform {
 
     fun Array<out StackTraceElement>.getExceptionLocation(): String {
         val filtered = filter { !it.className.contains("$") }
-        val result = filtered.firstOrNull { element ->
-            Platform.executeLocationList.any { element.className.startsWith(it) } && !element.toString().contains(
-                "invokeSuspend"
-            )
-        }
+        val result = filtered.getElement()
         val trace = result ?: if (size >= 3) {
             this[2]
         } else if (this.isNotEmpty()) {
@@ -42,6 +38,24 @@ actual object Platform {
         val className = if (trace.className.contains("$")) trace.className.split("$").first() else trace.className
         val method = trace.getCorrectMethodName()
 
-        return "${className.split(".").last()} -> $method()"
+        return "${className.split(".").last()} -> $method() @ ${trace.lineNumber}"
+    }
+
+    private fun List<StackTraceElement>.getElement(): StackTraceElement? {
+        val first = firstOrNull { element -> element.condition() }
+        val index = indexOf(first)
+        val result = if (first != null && index != -1 && size > index && this[index + 1].condition()) {
+            this[index + 1]
+        } else {
+            first
+        }
+
+        return result
+    }
+
+    private fun StackTraceElement.condition(): Boolean {
+        return Platform.executeLocationList.any { className.startsWith(it) } && !toString().contains(
+            "invokeSuspend"
+        )
     }
 }
