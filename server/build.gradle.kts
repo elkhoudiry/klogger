@@ -12,10 +12,7 @@ application {
 }
 
 dependencies {
-    implementation(klogger.auth0.mvc)
-    implementation(klogger.cassandra.migration)
     implementation(klogger.ch.qos.logback)
-    implementation(klogger.javax.servlet.api)
     implementation(klogger.kotlinx.datetime)
     implementation(klogger.kotlinx.serialization.json)
     implementation(klogger.ktor.server.call.logging.jvm)
@@ -30,7 +27,6 @@ dependencies {
     implementation(klogger.ktor.server.status.pages.jvm)
     implementation(klogger.ktor.server.content.negotiation.jvm)
     implementation(klogger.ktor.serialization.kotlinx.json.jvm)
-    implementation(klogger.realtime.cassandra)
 
     testImplementation(klogger.ktor.server.tests.jvm)
     testImplementation(klogger.kotlin.test)
@@ -39,4 +35,8 @@ dependencies {
 java {
     sourceCompatibility = JavaVersion.toVersion(klogger.versions.javaCompatibility.get())
     targetCompatibility = JavaVersion.toVersion(klogger.versions.javaCompatibility.get())
+
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(klogger.versions.javaCompatibility.get()))
+    }
 }
