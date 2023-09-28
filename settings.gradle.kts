@@ -23,10 +23,12 @@ rootProject.name = "klogger"
 
 include(":server")
 
-include(":core-shared")
-project(":core-shared").projectDir = file("core/shared")
+include(":core-caching-key-value")
+project(":core-caching-key-value").projectDir = file("core/caching-key-value")
 include(":core-server")
 project(":core-server").projectDir = file("core/server")
+include(":core-shared")
+project(":core-shared").projectDir = file("core/shared")
 
 include(":client-data-logger")
 project(":client-data-logger").projectDir = file("client/data/logger")
