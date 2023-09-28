@@ -21,6 +21,8 @@ kotlinxDateTime = "0.4.0"
 kotlinxSerialization = "1.5.0"
 ktlintGradlePlugin = "11.3.1"
 logback = "1.2.11"
+mokoResources = "0.23.0"
+mokoGraphics = "0.9.0"
 multiplatformUuid = "0.7.0"
 realtimeCassandra = "0.0.2"
 sqldelight = "2.0.0-alpha05"
@@ -74,6 +76,12 @@ ktor-serialization-kotlinx-json-jvm = { group = "io.ktor", name = "ktor-serializ
 
 multiplatform-uuid = { group = "com.benasher44", name = "uuid", version.ref = "multiplatformUuid" }
 
+moko-graphics = { group = "dev.icerock.moko", name = "graphics", version.ref = "mokoGraphics" }
+moko-resources = { group = "dev.icerock.moko", name = "resources", version.ref = "mokoResources" }
+moko-resources-compose = { group = "dev.icerock.moko", name = "resources-compose", version.ref = "mokoResources" }
+moko-resources-gradle-plugin = { group = "dev.icerock.moko", name = "resources-generator", version.ref = "mokoResources" }
+moko-resources-test = { group = "dev.icerock.moko", name = "resources-test", version.ref = "mokoResources" }
+
 realtime-cassandra = { group = "io.github.elkhoudiry", name = "realtime-cassandra", version.ref = "realtimeCassandra" }
 realtime-cassandra-jvm = { group = "io.github.elkhoudiry", name = "realtime-cassandra-jvm", version.ref = "realtimeCassandra" }
 
@@ -85,9 +93,11 @@ sqldelight-sqlite-driver = { group = "app.cash.sqldelight", name = "sqlite-drive
 [plugins]
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 google-play-services = { id = "com.google.gms.google-services", version.ref = "googlePlayServicesGradlePlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ktlint-gradle = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradlePlugin" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktorServer" }
+moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "mokoResources" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }

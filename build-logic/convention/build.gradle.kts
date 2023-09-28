@@ -13,6 +13,7 @@ dependencies {
     compileOnly(klogger.android.gradle.plugin)
     compileOnly(klogger.kotlin.gradle.plugin)
     compileOnly(klogger.sqldelight.gradle.plugin)
+    compileOnly(klogger.moko.resources.gradle.plugin)
 }
 
 gradlePlugin {
@@ -56,6 +57,11 @@ gradlePlugin {
         register("serverRouteModule") {
             id = "server.route.module"
             implementationClass = "ServerRouteConventionPlugin"
+        }
+
+        register("mokoResources") {
+            id = "moko.resources"
+            implementationClass = "MokoResourcesConventionPlugin"
         }
     }
 }

@@ -32,8 +32,8 @@ class CommonModuleConventionPlugin : Plugin<Project> {
         }
 
         extensions.configure<JavaPluginExtension> {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
+            sourceCompatibility = JavaVersion.toVersion(catalog.version("javaCompatibility").displayName)
+            targetCompatibility = JavaVersion.toVersion(catalog.version("javaCompatibility").displayName)
         }
     }
 }

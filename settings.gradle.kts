@@ -25,9 +25,11 @@ include(":server")
 
 include(":core-shared")
 project(":core-shared").projectDir = file("core/shared")
-
 include(":core-server")
 project(":core-server").projectDir = file("core/server")
+
+include(":data-log")
+project(":data-log").projectDir = file("data/log")
 
 include(":route-health")
 project(":route-health").projectDir = file("server-routes/health")

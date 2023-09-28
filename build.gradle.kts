@@ -5,6 +5,7 @@ plugins {
     alias(klogger.plugins.kotlin.serialization) apply false
     alias(klogger.plugins.ktlint.gradle) apply false
     alias(klogger.plugins.ktor) apply false
+    alias(klogger.plugins.moko.resources) apply false
     alias(klogger.plugins.sqldelight) apply false
 }
 
