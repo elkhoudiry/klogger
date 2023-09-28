@@ -5,7 +5,7 @@ import io.github.elkhoudiry.klogger.core.shared.message.message
 import io.github.elkhoudiry.klogger.core.shared.platform.Platform
 import io.github.elkhoudiry.klogger.core.shared.platform.Platform.exceptionLocation
 
-inline fun Exception.toError(message: Message? = null, details: Map<String, Any>): Throw {
+inline fun Exception.toError( details: Map<String, Any>, message: Message? = null): Throw {
     return when (this) {
         is InfoThrow -> this
         is CriticalThrow -> this.regression(

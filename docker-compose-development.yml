@@ -9,7 +9,7 @@ services:
         - "cassandra_node_dev_1:/var/lib/cassandra"
     environment:
       - "CASSANDRA_SEEDS=cassandra-seed"
-      - "CASSANDRA_CLUSTER_NAME=Vennsocial"
+      - "CASSANDRA_CLUSTER_NAME=Klogger"
       - "CASSANDRA_DC=datacenter1"
       - "CASSANDRA_ENDPOINT_SNITCH=se1"
 
