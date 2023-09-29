@@ -2,8 +2,13 @@ package io.github.elkhoudiry.klogger.client.data.logger.models
 
 import kotlinx.datetime.Clock
 
+enum class LogLevel {
+    DEBUG, INFO, WARN, ERROR
+}
+
 sealed interface Log {
     val localDatetime: String
+    val level: LogLevel
 }
 
 data class LogProperty(val property: String, val value: Any)
@@ -11,7 +16,8 @@ data class LogProperty(val property: String, val value: Any)
 data class EventLog(
     val type: Type,
     val description: String,
-    val context: List<LogProperty>
+    val context: List<LogProperty>,
+    override val level: LogLevel,
 ) : Log {
     override val localDatetime: String = Clock.System.now().toString()
 
@@ -35,18 +41,21 @@ sealed interface ExecutionLog : Log {
     data class Start(
         override val log: String,
         override val context: List<LogProperty>,
-        override val localDatetime: String = Clock.System.now().toString()
+        override val localDatetime: String = Clock.System.now().toString(),
+        override val level: LogLevel = LogLevel.DEBUG
     ) : ExecutionLog
 
     data class End(
         override val log: String,
         override val context: List<LogProperty>,
-        override val localDatetime: String = Clock.System.now().toString()
+        override val localDatetime: String = Clock.System.now().toString(),
+        override val level: LogLevel = LogLevel.DEBUG
     ) : ExecutionLog
 
     data class Info(
         override val log: String,
         override val context: List<LogProperty>,
-        override val localDatetime: String = Clock.System.now().toString()
+        override val localDatetime: String = Clock.System.now().toString(),
+        override val level: LogLevel = LogLevel.INFO
     ) : ExecutionLog
 }
