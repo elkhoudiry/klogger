@@ -12,7 +12,7 @@ class KtorHttpClient(
 
     val client = io.ktor.client.HttpClient(engine) {
         install(ContentNegotiation) {
-            json(core.shared.serialization.json)
+            json(io.github.elkhoudiry.klogger.core.shared.serialization.json)
         }
         install(ContentEncoding) {
             deflate()

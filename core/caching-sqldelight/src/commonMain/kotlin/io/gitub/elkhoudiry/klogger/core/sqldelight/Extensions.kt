@@ -1,4 +1,4 @@
-package core.sqldelight
+package io.gitub.elkhoudiry.klogger.core.sqldelight
 
 import app.cash.sqldelight.async.coroutines.await
 import app.cash.sqldelight.async.coroutines.awaitCreate
