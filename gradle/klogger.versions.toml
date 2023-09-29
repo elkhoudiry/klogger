@@ -56,8 +56,14 @@ kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDateTime" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 
-ktor-client-core-jvm = { group = "io.ktor", name = "ktor-client-core-jvm", version.ref = "ktorServer" }
-ktor-client-java-jvm = { group = "io.ktor", name = "ktor-client-java-jvm", version.ref = "ktorServer" }
+ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktorServer" }
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorServer" }
+ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktorServer" }
+ktor-client-mock = { group = "io.ktor", name = "ktor-client-mock", version.ref = "ktorServer" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktorServer" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktorServer" }
+ktor-client-encoding = { group = "io.ktor", name = "ktor-client-encoding", version.ref = "ktorServer" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktorServer" }
 
 ktor-server-call-id-jvm = { group = "io.ktor", name = "ktor-server-call-id-jvm", version.ref = "ktorServer" }
 ktor-server-CIO-jvm = { group = "io.ktor", name = "ktor-server-cio-jvm", version.ref = "ktorServer" }

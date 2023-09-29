@@ -1,4 +1,4 @@
-package io.github.elkhoudiry.klogger.client.data.log.models
+package io.github.elkhoudiry.klogger.client.data.logger.models
 
 import kotlinx.datetime.Clock
 
