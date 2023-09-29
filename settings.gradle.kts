@@ -37,4 +37,4 @@ include(":client-data-logger")
 project(":client-data-logger").projectDir = file("client/data/logger")
 
 include(":route-health")
-project(":route-health").projectDir = file("server-routes/health")
+project(":route-health").projectDir = file("server/routes/health")
