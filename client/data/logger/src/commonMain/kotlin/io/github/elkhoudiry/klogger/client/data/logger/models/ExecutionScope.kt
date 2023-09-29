@@ -27,7 +27,7 @@ class ExecutionScope<T>(
         return block(this)
     }
 
-    fun toDetails():Map<String, Any> {
+    fun toDetails(): Map<String, Any> {
         return details
     }
 }

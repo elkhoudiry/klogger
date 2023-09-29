@@ -1,10 +1,9 @@
 package io.github.elkhoudiry.klogger.client.data.logger
 
+import io.github.elkhoudiry.klogger.client.data.logger.models.EventLog
 import io.github.elkhoudiry.klogger.client.data.logger.models.ExecutionScope
-import io.github.elkhoudiry.klogger.client.data.logger.models.ExecutionLog
 import io.github.elkhoudiry.klogger.client.data.logger.models.LogProperty
 import io.github.elkhoudiry.klogger.core.shared.errors.CriticalThrow
-import io.github.elkhoudiry.klogger.core.shared.errors.Throw
 import io.github.elkhoudiry.klogger.core.shared.errors.toError
 import io.github.elkhoudiry.klogger.core.shared.platform.Platform
 import kotlinx.coroutines.currentCoroutineContext
@@ -12,18 +11,21 @@ import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
-expect class Logger() {
+expect class Logger {
 
-    fun initialize()
+    internal fun startWork(message: String)
 
-    fun debug(message: String, context: List<LogProperty>)
+    internal fun finishWork(message: String)
 
-    fun info(message: String, context: List<LogProperty>)
+    fun debug(message: String, context: List<LogProperty> = listOf())
 
-    fun warn(message: String, context: List<LogProperty>)
+    fun info(message: String, context: List<LogProperty> = listOf())
 
-    fun error(message: String, context: List<LogProperty>)
+    fun warn(message: String, context: List<LogProperty> = listOf())
 
+    fun error(message: String, context: List<LogProperty> = listOf())
+
+    fun event(type: EventLog.Type, description: String, context: List<LogProperty>)
 }
 
 inline fun <T> Logger.log(
@@ -35,7 +37,7 @@ inline fun <T> Logger.log(
             block()
         } catch (ex: Exception) {
             if (ex is CriticalThrow) {
-                throw ex.regression(location = Platform.executeLocation(),  cause = ex, details = toDetails())
+                throw ex.regression(location = Platform.executeLocation(), cause = ex, details = toDetails())
             } else {
                 throw ex.toError(details = toDetails())
             }

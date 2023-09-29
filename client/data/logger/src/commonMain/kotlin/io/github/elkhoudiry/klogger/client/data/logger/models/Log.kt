@@ -17,7 +17,7 @@ data class EventLog(
     val type: Type,
     val description: String,
     val context: List<LogProperty>,
-    override val level: LogLevel,
+    override val level: LogLevel
 ) : Log {
     override val localDatetime: String = Clock.System.now().toString()
 
