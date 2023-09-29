@@ -7,8 +7,8 @@ import io.ktor.serialization.kotlinx.json.json
 
 class KtorHttpClient(
     engine: HttpClientEngine,
-    unsafeEngine: HttpClientEngine,
-)  {
+    unsafeEngine: HttpClientEngine
+) {
 
     val client = io.ktor.client.HttpClient(engine) {
         install(ContentNegotiation) {
