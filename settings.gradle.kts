@@ -21,7 +21,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "klogger"
 
-include(":server")
+include(":server-app")
+project(":server-app").projectDir = file("server/app")
 
 include(":core-caching-key-value")
 project(":core-caching-key-value").projectDir = file("core/caching-key-value")
