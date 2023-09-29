@@ -24,11 +24,11 @@ class IosKeyValueCache : KeyValueCache {
         NSUserDefaults.standardUserDefaults.setBool(value, key)
     }
 
-    override fun setFloat(key: String, value: Float)  {
+    override fun setFloat(key: String, value: Float) {
         NSUserDefaults.standardUserDefaults.setFloat(value, key)
     }
 
-    override fun getString(key: String, default: String): String  {
+    override fun getString(key: String, default: String): String {
         val value = NSUserDefaults.standardUserDefaults.objectForKey(key) ?: default
         val result = if (value !is String || value.isBlank()) default else value
 
@@ -50,7 +50,7 @@ class IosKeyValueCache : KeyValueCache {
         }
     }
 
-    override fun getInt(key: String, default: Int): Int  {
+    override fun getInt(key: String, default: Int): Int {
         val value = NSUserDefaults.standardUserDefaults.integerForKey(key).toInt()
         val result = if (value == 0) default else value
 
@@ -72,7 +72,7 @@ class IosKeyValueCache : KeyValueCache {
         }
     }
 
-    override fun getLong(key: String, default: Long): Long  {
+    override fun getLong(key: String, default: Long): Long {
         val value = NSUserDefaults.standardUserDefaults.integerForKey(key)
         val result = if (value == 0L) default else value
 
@@ -115,14 +115,14 @@ class IosKeyValueCache : KeyValueCache {
         }
     }
 
-    override fun getFloat(key: String, default: Float): Float  {
+    override fun getFloat(key: String, default: Float): Float {
         val value = NSUserDefaults.standardUserDefaults.floatForKey(key)
         val result = if (value == 0.0f) default else value
 
         return result
     }
 
-    override fun streamFloat(key: String, default: Float): Flow<Float>  {
+    override fun streamFloat(key: String, default: Float): Flow<Float> {
         val listener = if (listeners[key] != null) {
             listeners[key]!!
         } else {
@@ -137,7 +137,7 @@ class IosKeyValueCache : KeyValueCache {
         }
     }
 
-    override fun remove(key: String)  {
+    override fun remove(key: String) {
         NSUserDefaults.standardUserDefaults.removeObjectForKey(key)
     }
 }

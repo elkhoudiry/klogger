@@ -8,7 +8,6 @@ import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.call
 import io.ktor.server.application.install
 import io.ktor.server.plugins.statuspages.StatusPages
-import io.ktor.server.request.uri
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
@@ -29,7 +28,7 @@ private suspend fun ApplicationCall.fail(failure: Throwable) = when (failure) {
         errorResponse(
             HttpResponseStatus.BAD_REQUEST.code(),
             failure,
-            failure.technicalMessage,
+            failure.technicalMessage
         )
     }
 
@@ -37,7 +36,7 @@ private suspend fun ApplicationCall.fail(failure: Throwable) = when (failure) {
         errorResponse(
             HttpResponseStatus.BAD_REQUEST.code(),
             failure,
-            failure.message,
+            failure.message
         )
     }
 }

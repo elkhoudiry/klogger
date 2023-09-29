@@ -23,7 +23,10 @@ class InvalidBodyException(
     location: String,
     cause: Exception
 ) : ResponseException(
-    friendlyMessage = friendlyMessage, technicalMessage = technicalMessage, location = location, cause = cause
+    friendlyMessage = friendlyMessage,
+    technicalMessage = technicalMessage,
+    location = location,
+    cause = cause
 )
 
 class MissingPropertyException(
@@ -41,5 +44,5 @@ class MissingPropertyException(
 inline fun missingProperty(
     property: String,
     friendlyMessage: Message? = null,
-    location: String = Platform.executeLocation(),
+    location: String = Platform.executeLocation()
 ): Nothing = throw MissingPropertyException(property, location, friendlyMessage)

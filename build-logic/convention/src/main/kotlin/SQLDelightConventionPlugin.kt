@@ -24,10 +24,6 @@ class SQLDelightConventionPlugin : Plugin<Project> {
         commonDependencies {
             implementation(project(":core-caching-sqldelight"))
         }
-
-        commonTestDependencies {
-            implementation(project(":core-caching-sqldelight-test"))
-        }
     }
 }
 

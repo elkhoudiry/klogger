@@ -11,7 +11,7 @@ data class LogProperty(val property: String, val value: Any)
 data class EventLog(
     val type: Type,
     val description: String,
-    val context: List<LogProperty>,
+    val context: List<LogProperty>
 ) : Log {
     override val localDatetime: String = Clock.System.now().toString()
 
@@ -29,24 +29,24 @@ data class EventLog(
     }
 }
 
-sealed interface ExecutionLog: Log {
+sealed interface ExecutionLog : Log {
     val log: String
     val context: List<LogProperty>
     data class Start(
         override val log: String,
         override val context: List<LogProperty>,
-        override val localDatetime: String = Clock.System.now().toString(),
+        override val localDatetime: String = Clock.System.now().toString()
     ) : ExecutionLog
 
     data class End(
         override val log: String,
         override val context: List<LogProperty>,
-        override val localDatetime: String = Clock.System.now().toString(),
+        override val localDatetime: String = Clock.System.now().toString()
     ) : ExecutionLog
 
     data class Info(
         override val log: String,
         override val context: List<LogProperty>,
-        override val localDatetime: String = Clock.System.now().toString(),
+        override val localDatetime: String = Clock.System.now().toString()
     ) : ExecutionLog
 }

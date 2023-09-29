@@ -25,6 +25,8 @@ include(":server")
 
 include(":core-caching-key-value")
 project(":core-caching-key-value").projectDir = file("core/caching-key-value")
+include(":core-caching-sqldelight")
+project(":core-caching-sqldelight").projectDir = file("core/caching-sqldelight")
 include(":core-server")
 project(":core-server").projectDir = file("core/server")
 include(":core-shared")

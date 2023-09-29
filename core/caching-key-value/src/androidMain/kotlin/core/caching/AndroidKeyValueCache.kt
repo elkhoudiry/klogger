@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 
 class AndroidKeyValueCache(
-    applicationContext: Context,
+    applicationContext: Context
 ) : KeyValueCache {
 
     private val storage = applicationContext.getSharedPreferences(
@@ -43,7 +43,7 @@ class AndroidKeyValueCache(
         return result
     }
 
-    override fun streamString(key: String, default: String): Flow<String>  {
+    override fun streamString(key: String, default: String): Flow<String> {
         return stream(key) {
             val value = it.getString(key, default) ?: default
             value
@@ -62,7 +62,7 @@ class AndroidKeyValueCache(
         }
     }
 
-    override fun getLong(key: String, default: Long): Long  {
+    override fun getLong(key: String, default: Long): Long {
         val result = storage.getLong(key, default)
         return result
     }
@@ -79,14 +79,14 @@ class AndroidKeyValueCache(
         return result
     }
 
-    override fun streamBoolean(key: String, default: Boolean): Flow<Boolean>  {
+    override fun streamBoolean(key: String, default: Boolean): Flow<Boolean> {
         return stream(key) {
             val value = it.getBoolean(key, default)
             value
         }
     }
 
-    override fun getFloat(key: String, default: Float): Float  {
+    override fun getFloat(key: String, default: Float): Float {
         val result = storage.getFloat(key, default)
         return result
     }
@@ -98,7 +98,7 @@ class AndroidKeyValueCache(
         }
     }
 
-    override fun remove(key: String)  {
+    override fun remove(key: String) {
         storage.edit().remove(key).apply()
     }
 
