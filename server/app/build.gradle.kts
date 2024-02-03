@@ -12,9 +12,9 @@ application {
 }
 
 dependencies {
-    implementation(project(":core-server"))
-    implementation(project(":core-shared"))
-    implementation(project(":route-health"))
+    compileOnly(project(":core-server"))
+    compileOnly(project(":core-shared"))
+    compileOnly(project(":route-health"))
 
     implementation(klogger.ch.qos.logback)
     implementation(klogger.kotlinx.datetime)

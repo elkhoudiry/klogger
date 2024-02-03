@@ -3,4 +3,5 @@ plugins {
     id("android.target.library")
     id("jvm.target.library")
     id("ios.target.library")
+    id("server.dependency.module")
 }

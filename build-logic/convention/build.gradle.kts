@@ -64,4 +64,11 @@ gradlePlugin {
             implementationClass = "MokoResourcesConventionPlugin"
         }
     }
+
+    plugins {
+        register("serverDependencyModule") {
+            id = "server.dependency.module"
+            implementationClass = "ServerDependencyConventionPlugin"
+        }
+    }
 }

@@ -24,6 +24,9 @@ rootProject.name = "klogger"
 include(":server-app")
 project(":server-app").projectDir = file("server/app")
 
+include(":server-data-logger")
+project(":server-data-logger").projectDir = file("server/data/logger")
+
 include(":core-caching-key-value")
 project(":core-caching-key-value").projectDir = file("core/caching-key-value")
 include(":core-caching-sqldelight")
