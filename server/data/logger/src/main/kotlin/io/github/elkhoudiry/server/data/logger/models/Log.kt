@@ -1,8 +1,10 @@
 package io.github.elkhoudiry.server.data.logger.models
 
-import com.benasher44.uuid.uuid4
+import io.github.elkhoudiry.klogger.core.shared.platform.uuid
 import kotlinx.datetime.Clock
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 enum class LogLevel {
     DEBUG, INFO, WARN, ERROR
@@ -18,18 +20,21 @@ data class Log(
     val type: LogType,
     val level: LogLevel,
     val properties: List<LogProperty>,
-    val clientDateTime: String
-) {
+    @SerialName("datetime")
     val serverDateTime: String = Clock.System
         .now()
-        .toString()
+        .toString(),
 
-    val id: String = uuid4().toString()
+    @Transient
+    val clientDateTime: String = serverDateTime
+) {
+
+    val id: String = uuid()
 }
 
 @Serializable
 data class LogProperty(
-    val id: String = uuid4().toString(),
+    val id: String = uuid(),
     val name: String,
     val value: String
 )

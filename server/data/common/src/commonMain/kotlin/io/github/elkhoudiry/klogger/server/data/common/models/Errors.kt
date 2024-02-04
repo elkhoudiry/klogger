@@ -40,6 +40,17 @@ class MissingPropertyException(
     cause = Exception("Property $property is missing.")
 )
 
+class ResourceNotFoundException(
+    val technicalMessage: String,
+    friendlyMessage: Message = message(technicalMessage),
+    location: String
+) : Report(
+    display = friendlyMessage,
+    cause = Exception(technicalMessage),
+    location = location,
+    details = mapOf("technical_message" to technicalMessage)
+)
+
 @Suppress("NOTHING_TO_INLINE")
 inline fun missingProperty(
     property: String,
@@ -58,4 +69,15 @@ inline fun badRequest(
     location = location,
     friendlyMessage = friendlyMessage ?: message(technicalMessage),
     cause = cause
+)
+
+@Suppress("NOTHING_TO_INLINE")
+inline fun notFound(
+    technicalMessage: String = "Resource not found",
+    friendlyMessage: Message? = null,
+    location: String = Platform.executeLocation()
+): Nothing = throw ResourceNotFoundException(
+    technicalMessage = technicalMessage,
+    location = location,
+    friendlyMessage = friendlyMessage ?: message(technicalMessage)
 )

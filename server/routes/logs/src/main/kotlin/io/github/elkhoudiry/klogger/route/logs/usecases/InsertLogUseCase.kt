@@ -16,6 +16,8 @@ import io.ktor.server.application.ApplicationCall
 import io.ktor.server.request.receiveText
 import io.ktor.server.response.respond
 import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 
 internal class InsertLogUseCase(
     private val logging: LoggerRepository
@@ -26,7 +28,7 @@ internal class InsertLogUseCase(
 
         logging.insert(log)
 
-        call.respond(HttpStatusCode.Created)
+        call.respond(HttpStatusCode.Created, buildJsonObject { put("id", log.id) })
     }
 
     private suspend fun getLog(call: ApplicationCall): Log {

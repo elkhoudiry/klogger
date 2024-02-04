@@ -9,15 +9,15 @@ class DefaultLoggerRepository : LoggerRepository {
         return list
     }
 
+    override fun getById(id: String): Log? {
+        return list.find { it.id == id }
+    }
+
     override suspend fun insert(log: Log) {
         list.add(log)
     }
 
-    override suspend fun deleteById(id: String) {
-        list.removeIf { it.id == id }
-    }
-
-    override suspend fun deleteAll() {
-        list.clear()
+    override suspend fun deleteById(id: String): Boolean {
+        return list.removeIf { it.id == id }
     }
 }
