@@ -10,12 +10,17 @@ class KotlinModuleConventionPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         pluginManager.apply {
             apply(catalog.plugin("kotlin-jvm"))
+            apply(catalog.plugin("kotlin-serialization"))
         }
 
         dependencies {
+            add("implementation", project(":core-shared"))
+
             add("implementation", catalog.library("kotlinx.coroutines.core"))
             add("implementation", catalog.library("kotlinx.datetime"))
             add("implementation", catalog.library("kotlinx.serialization.json"))
+            add("implementation", catalog.library("multiplatform.uuid"))
+
 
             add("testImplementation", catalog.library("kotlin.test"))
             add("testImplementation", catalog.library("kotlinx.coroutines.test"))

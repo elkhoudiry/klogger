@@ -1,9 +1,10 @@
 package io.github.elkhoudiry.klogger.server.plugins
 
-import io.github.elkhoudiry.klogger.core.server.models.ResponseException
 import io.github.elkhoudiry.klogger.core.shared.serialization.json
 import io.github.elkhoudiry.klogger.route.health.health
+import io.github.elkhoudiry.klogger.route.logs.log
 import io.github.elkhoudiry.klogger.server.core.errorResponse
+import io.github.elkhoudiry.klogger.server.data.common.models.ResponseException
 import io.ktor.content.TextContent
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
@@ -29,6 +30,7 @@ fun Application.configureRouting() {
     routing {
         get("/") { call.respondText("Hello World!") }
         health(apiBase)
+        log(apiBase)
         sendPipeline.intercept(ApplicationSendPipeline.Transform) {
             proceedWith(it.override(this.context))
         }

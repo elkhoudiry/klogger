@@ -15,6 +15,7 @@ dependencies {
     compileOnly(project(":server-data-common"))
     compileOnly(project(":core-shared"))
     compileOnly(project(":route-health"))
+    compileOnly(project(":route-logs"))
 
     implementation(klogger.ch.qos.logback)
     implementation(klogger.kotlinx.datetime)

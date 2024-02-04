@@ -46,3 +46,16 @@ inline fun missingProperty(
     friendlyMessage: Message? = null,
     location: String = Platform.executeLocation()
 ): Nothing = throw MissingPropertyException(property, location, friendlyMessage)
+
+@Suppress("NOTHING_TO_INLINE")
+inline fun badRequest(
+    technicalMessage: String = "Request's body is invalid",
+    friendlyMessage: Message? = null,
+    location: String = Platform.executeLocation(),
+    cause: Exception = Exception(technicalMessage)
+): Nothing = throw InvalidBodyException(
+    technicalMessage = technicalMessage,
+    location = location,
+    friendlyMessage = friendlyMessage ?: message(technicalMessage),
+    cause = cause
+)
