@@ -12,7 +12,7 @@ application {
 }
 
 dependencies {
-    compileOnly(project(":core-server"))
+    compileOnly(project(":server-data-common"))
     compileOnly(project(":core-shared"))
     compileOnly(project(":route-health"))
 

@@ -24,15 +24,15 @@ rootProject.name = "klogger"
 include(":server-app")
 project(":server-app").projectDir = file("server/app")
 
+include(":server-data-common")
+project(":server-data-common").projectDir = file("server/data/common")
 include(":server-data-logger")
 project(":server-data-logger").projectDir = file("server/data/logger")
 
 include(":core-caching-key-value")
-project(":core-caching-key-value").projectDir = file("core/caching-key-value")
+project(":core-caching-key-value").projectDir = file("core/caching/key-value")
 include(":core-caching-sqldelight")
-project(":core-caching-sqldelight").projectDir = file("core/caching-sqldelight")
-include(":core-server")
-project(":core-server").projectDir = file("core/server")
+project(":core-caching-sqldelight").projectDir = file("core/caching/sqldelight")
 include(":core-shared")
 project(":core-shared").projectDir = file("core/shared")
 

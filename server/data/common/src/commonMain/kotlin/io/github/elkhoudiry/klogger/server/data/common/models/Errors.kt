@@ -1,4 +1,4 @@
-package io.github.elkhoudiry.klogger.core.server.models
+package io.github.elkhoudiry.klogger.server.data.common.models
 
 import io.github.elkhoudiry.klogger.core.shared.errors.Report
 import io.github.elkhoudiry.klogger.core.shared.message.Message
