@@ -12,12 +12,12 @@ import io.ktor.server.routing.Routing
 private val logger: LoggerRepository = DefaultLoggerRepository()
 private val useCases = LogRouteUseCases(logging = logger)
 
-fun Routing.log(apiBase: String) {
-    getInclusive("$apiBase/logs") { useCases.getAll.execute(call) }
+fun Routing.log() {
+    getInclusive("/api/v1/logs") { useCases.getAll.execute(call) }
 
-    postInclusive("$apiBase/logs") { useCases.insertLog.execute(call) }
+    postInclusive("/api/v1/logs") { useCases.insertLog.execute(call) }
 
-    getInclusive("$apiBase/logs/{id}") { useCases.getById.execute(call) }
+    getInclusive("/api/v1/logs/{id}") { useCases.getById.execute(call) }
 
-    deleteInclusive("$apiBase/logs/{id}") { useCases.deleteById.execute(call) }
+    deleteInclusive("/api/v1/logs/{id}") { useCases.deleteById.execute(call) }
 }

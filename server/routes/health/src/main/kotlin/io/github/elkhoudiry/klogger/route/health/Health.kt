@@ -13,12 +13,12 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
-fun Routing.health(apiBase: String) {
-    get(Regex("$apiBase/health.*")) {
-        call.respondRedirect("$apiBase/health")
+fun Routing.health() {
+    get(Regex("/api/v1/health.*")) {
+        call.respondRedirect("/api/v1/health")
     }
 
-    get("$apiBase/health") {
+    get("/api/v1/health") {
         call.respond(call.health())
     }
 }

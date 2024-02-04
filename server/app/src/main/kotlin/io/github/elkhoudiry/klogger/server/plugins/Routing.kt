@@ -16,13 +16,11 @@ import io.ktor.server.routing.routing
 import io.netty.handler.codec.http.HttpResponseStatus
 
 fun Application.configureRouting() {
-    val apiBase = "/api/v1"
-
     install(StatusPages) { exception<Throwable> { call, cause -> call.fail(cause) } }
     routing {
-        get("/") { call.respondText("Hello World!") }
-        health(apiBase)
-        log(apiBase)
+        get("/") { call.respondText("Hello Klogger!") }
+        health()
+        log()
     }
 }
 
