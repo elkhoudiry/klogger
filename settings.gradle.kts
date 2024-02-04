@@ -39,6 +39,8 @@ project(":core-shared").projectDir = file("core/shared")
 include(":client-data-logger")
 project(":client-data-logger").projectDir = file("client/data/logger")
 
+include(":route-common")
+project(":route-common").projectDir = file("server/routes/common")
 include(":route-health")
 project(":route-health").projectDir = file("server/routes/health")
 include(":route-logs")
