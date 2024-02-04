@@ -1,15 +1,18 @@
 package io.github.elkhoudiry.klogger.core.shared.message
 
-data class Message(val en: String) {
-    fun get(): String {
-        return en
+class Message(message: String, vararg locales: Pair<MessageLocalization, String>) {
+
+    private val value: Map<MessageLocalization, String> = mapOf(Default to message) + locales
+
+    fun get(locale: MessageLocalization = Default): String {
+        return value[locale] ?: value[Default]!!
     }
 }
 
-fun message(en: String?): Message {
-    return Message(en ?: "No message available.")
+fun message(default: String): Message {
+    return Message(default)
 }
 
-fun String?.toMessage(en: String? = this): Message {
-    return message(en)
-}
+interface MessageLocalization
+
+object Default : MessageLocalization

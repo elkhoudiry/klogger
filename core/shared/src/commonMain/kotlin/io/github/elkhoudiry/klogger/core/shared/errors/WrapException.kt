@@ -5,19 +5,20 @@ import io.github.elkhoudiry.klogger.core.shared.message.message
 import io.github.elkhoudiry.klogger.core.shared.platform.Platform
 import io.github.elkhoudiry.klogger.core.shared.platform.Platform.exceptionLocation
 
-inline fun Exception.toError(details: Map<String, Any>, message: Message? = null): Throw {
+inline fun Exception.toError(details: Map<String, Any>, message: Message? = null): Error {
     return when (this) {
-        is InfoThrow -> this
-        is CriticalThrow -> this.regression(
+        is Info -> this
+
+        is Report -> this.regression(
             location = Platform.executeLocation(),
             details = details,
-            message = message ?: message(this.message),
             cause = this
         )
-        else -> CriticalThrow(
-            callLocation = Platform.executeLocation(),
+
+        else -> Unexpected(
+            location = Platform.executeLocation(),
             details = details.toMap(),
-            message = message ?: message(this.message),
+            display = message ?: message(this.message ?: "Unexpected error happened"),
             cause = this
         )
     }
