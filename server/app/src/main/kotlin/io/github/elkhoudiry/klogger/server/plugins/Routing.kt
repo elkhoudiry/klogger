@@ -55,9 +55,15 @@ private suspend fun ApplicationCall.fail(failure: Throwable) = when (failure) {
 
 private fun Any.override(call: ApplicationCall): Any {
     if (this !is TextContent) return this
+    if (call.request.uri.contains("/health")) return this
+
     val overridden = JsonObject(
         mapOf(
-            "datetime" to JsonPrimitive(Clock.System.now().toString()),
+            "datetime" to JsonPrimitive(
+                Clock.System
+                    .now()
+                    .toString()
+            ),
             "method" to JsonPrimitive(call.request.httpMethod.value),
             "url" to JsonPrimitive(call.request.uri),
             "payload" to json.parseToJsonElement(this.text)
