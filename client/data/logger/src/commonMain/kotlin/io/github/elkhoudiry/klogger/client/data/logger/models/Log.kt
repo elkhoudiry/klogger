@@ -29,6 +29,7 @@ data class EventLog(
         HttpRequest { override fun toString(): String = "http_request" },
         HttpResponse { override fun toString(): String = "http_response" },
         Click { override fun toString(): String = "click" },
+        Input { override fun toString(): String = "input" },
         Swipe { override fun toString(): String = "swipe" },
         Scroll { override fun toString(): String = "scroll" },
         Back { override fun toString(): String = "back" }

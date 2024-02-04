@@ -1,6 +1,6 @@
 package io.github.elkhoudiry.klogger.core.server.models
 
-import io.github.elkhoudiry.klogger.core.shared.errors.CriticalThrow
+import io.github.elkhoudiry.klogger.core.shared.errors.Report
 import io.github.elkhoudiry.klogger.core.shared.message.Message
 import io.github.elkhoudiry.klogger.core.shared.message.message
 import io.github.elkhoudiry.klogger.core.shared.platform.Platform
@@ -10,10 +10,10 @@ abstract class ResponseException(
     val friendlyMessage: Message,
     location: String,
     cause: Exception
-) : CriticalThrow(
-    message = friendlyMessage,
+) : Report(
+    display = friendlyMessage,
     cause = cause,
-    callLocation = location,
+    location = location,
     details = mapOf("technical_message" to technicalMessage)
 )
 

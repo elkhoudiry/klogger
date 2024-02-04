@@ -3,7 +3,8 @@ package io.github.elkhoudiry.klogger.client.data.logger
 import io.github.elkhoudiry.klogger.client.data.logger.models.EventLog
 import io.github.elkhoudiry.klogger.client.data.logger.models.ExecutionScope
 import io.github.elkhoudiry.klogger.client.data.logger.models.LogProperty
-import io.github.elkhoudiry.klogger.core.shared.errors.CriticalThrow
+import io.github.elkhoudiry.klogger.core.shared.errors.Info
+import io.github.elkhoudiry.klogger.core.shared.errors.Report
 import io.github.elkhoudiry.klogger.core.shared.errors.toError
 import io.github.elkhoudiry.klogger.core.shared.platform.Platform
 import kotlinx.coroutines.currentCoroutineContext
@@ -36,10 +37,18 @@ inline fun <T> Logger.log(
         try {
             block()
         } catch (ex: Exception) {
-            if (ex is CriticalThrow) {
-                throw ex.regression(location = Platform.executeLocation(), cause = ex, details = toDetails())
-            } else {
-                throw ex.toError(details = toDetails())
+            when (ex) {
+                is Report -> {
+                    throw ex.regression(location = Platform.executeLocation(), cause = ex, details = toDetails())
+                }
+
+                is Info -> {
+                    throw ex
+                }
+
+                else -> {
+                    throw ex.toError(details = toDetails())
+                }
             }
         }
     }
@@ -58,10 +67,18 @@ suspend inline fun <T> Logger.async(
         try {
             block()
         } catch (ex: Exception) {
-            if (ex is CriticalThrow) {
-                throw ex.regression(location = Platform.executeLocation(), cause = ex, details = toDetails())
-            } else {
-                throw ex.toError(details = toDetails())
+            when (ex) {
+                is Report -> {
+                    throw ex.regression(location = Platform.executeLocation(), cause = ex, details = toDetails())
+                }
+
+                is Info -> {
+                    throw ex
+                }
+
+                else -> {
+                    throw ex.toError(details = toDetails())
+                }
             }
         }
     }

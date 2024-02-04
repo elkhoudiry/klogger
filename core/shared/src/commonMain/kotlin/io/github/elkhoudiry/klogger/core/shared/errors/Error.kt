@@ -75,14 +75,13 @@ abstract class Report(
     )
 }
 
-
 class Unexpected(
     cause: Throwable,
     display: Message = message(
         cause.message?.ifBlank { "Unexpected error happened" } ?: "Unexpected error happened"
     ),
     location: String,
-    details: Map<String, Any?>,
+    details: Map<String, Any?>
 ) : Report(
     display = display,
     cause = cause,
