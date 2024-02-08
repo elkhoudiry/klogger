@@ -21,16 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "klogger"
 
-include(":server-app")
-project(":server-app").projectDir = file("server/app")
-
-include(":server-data-common")
-project(":server-data-common").projectDir = file("server/data/common")
-include(":server-data-events")
-project(":server-data-events").projectDir = file("server/data/events")
-include(":server-data-logs")
-project(":server-data-logs").projectDir = file("server/data/logs")
-
 include(":core-caching-key-value")
 project(":core-caching-key-value").projectDir = file("core/caching/key-value")
 include(":core-caching-sqldelight")
@@ -41,11 +31,21 @@ project(":core-shared").projectDir = file("core/shared")
 include(":client-data-logger")
 project(":client-data-logger").projectDir = file("client/data/logger")
 
-include(":route-common")
-project(":route-common").projectDir = file("server/routes/common")
-include(":route-events")
-project(":route-events").projectDir = file("server/routes/events")
-include(":route-health")
-project(":route-health").projectDir = file("server/routes/health")
-include(":route-logs")
-project(":route-logs").projectDir = file("server/routes/logs")
+include(":server-application")
+project(":server-application").projectDir = file("server/application")
+
+include(":server-data-common")
+project(":server-data-common").projectDir = file("server/data/common")
+include(":server-data-events")
+project(":server-data-events").projectDir = file("server/data/events")
+include(":server-data-logs")
+project(":server-data-logs").projectDir = file("server/data/logs")
+
+include(":server-route-common")
+project(":server-route-common").projectDir = file("server/route/common")
+include(":server-route-events")
+project(":server-route-events").projectDir = file("server/route/events")
+include(":server-route-health")
+project(":server-route-health").projectDir = file("server/route/health")
+include(":server-route-logs")
+project(":server-route-logs").projectDir = file("server/route/logs")
