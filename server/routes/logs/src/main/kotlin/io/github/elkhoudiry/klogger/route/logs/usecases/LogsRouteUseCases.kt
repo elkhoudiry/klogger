@@ -2,7 +2,7 @@ package io.github.elkhoudiry.klogger.route.logs.usecases
 
 import io.github.elkhoudiry.server.data.logger.repositories.LoggerRepository
 
-internal class LogRouteUseCases(
+internal class LogsRouteUseCases(
     logging: LoggerRepository
 ) {
     val insertLog = InsertLogUseCase(
