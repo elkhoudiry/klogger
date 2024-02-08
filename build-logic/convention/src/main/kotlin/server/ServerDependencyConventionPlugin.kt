@@ -9,7 +9,7 @@ class ServerDependencyConventionPlugin: Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         val copyLib = tasks.create("copyLib") {
             this.doLast {
-                val serverPath = "${rootProject.projectDir.path}/server/app"
+                val serverPath = "${rootProject.projectDir.path}/server/application"
 
                 if (target.extensions.findByType<KotlinMultiplatformExtension>() != null) {
                     file("build/classes/kotlin/jvm").copyRecursively(file("$serverPath/build/classes/kotlin"), overwrite = true)
