@@ -1,4 +1,4 @@
-package io.github.elkhoudiry.klogger.route.logs.usecases
+package io.github.elkhoudiry.klogger.route.events.usecases
 
 import io.github.elkhoudiry.klogger.core.shared.platform.uuid
 import io.github.elkhoudiry.klogger.core.shared.serialization.json
@@ -7,11 +7,9 @@ import io.github.elkhoudiry.klogger.server.data.common.models.badRequest
 import io.github.elkhoudiry.klogger.server.data.common.serialization.arrayOrNull
 import io.github.elkhoudiry.klogger.server.data.common.serialization.objectOrNull
 import io.github.elkhoudiry.klogger.server.data.common.serialization.stringOrReject
-import io.github.elkhoudiry.server.data.logger.models.Log
-import io.github.elkhoudiry.server.data.logger.models.LogLevel
-import io.github.elkhoudiry.server.data.logger.models.LogProperty
-import io.github.elkhoudiry.server.data.logger.models.LogType
-import io.github.elkhoudiry.server.data.logger.repositories.LoggerRepository
+import io.github.elkhoudiry.server.data.events.models.Event
+import io.github.elkhoudiry.server.data.events.models.EventProperty
+import io.github.elkhoudiry.server.data.events.repositories.EventsRepository
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.request.receiveText
@@ -20,43 +18,42 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
-internal class InsertLogUseCase(
-    private val logging: LoggerRepository
+internal class InsertEventUseCase(
+    private val events: EventsRepository
 ) {
 
     suspend fun execute(call: ApplicationCall) {
-        val log = getLog(call)
+        val event = getEvent(call)
 
-        logging.insert(log)
+        events.insert(event)
 
-        call.respond(HttpStatusCode.Created, buildJsonObject { put("id", log.id) })
+        call.respond(HttpStatusCode.Created, buildJsonObject { put("id", event.id) })
     }
 
-    private suspend fun getLog(call: ApplicationCall): Log {
+    private suspend fun getEvent(call: ApplicationCall): Event {
         val json = json.parseObject(call.receiveText()) ?: badRequest()
         val id = uuid()
-
-        return Log(
+        return Event(
             id = id,
-            log = json.stringOrReject("log"),
-            level = json.stringOrReject("level", LogLevel::class),
-            type = json.stringOrReject("type", LogType::class),
             clientDateTime = json.stringOrReject("datetime"),
-            properties = getProperties(json["properties"])
+            properties = getProperties(json["properties"]),
+            description = json.stringOrReject("description"),
+            type = json.stringOrReject("type", Event.Type::class)
         )
     }
 
-    private fun getProperties(element: JsonElement?): List<LogProperty> {
+    private fun getProperties(element: JsonElement?): List<EventProperty> {
         val json = element ?: return emptyList()
         val properties = json.arrayOrNull ?: badRequest()
 
         return properties.map { getProperty(it) }
     }
 
-    private fun getProperty(element: JsonElement): LogProperty {
+    private fun getProperty(element: JsonElement): EventProperty {
         val property = element.objectOrNull ?: badRequest()
         val id = uuid()
-        return LogProperty(
+
+        return EventProperty(
             id = id,
             name = property.stringOrReject("name"),
             value = property.stringOrReject("value")

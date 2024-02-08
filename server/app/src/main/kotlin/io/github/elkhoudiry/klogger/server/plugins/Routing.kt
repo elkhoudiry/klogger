@@ -1,7 +1,8 @@
 package io.github.elkhoudiry.klogger.server.plugins
 
+import io.github.elkhoudiry.klogger.route.events.events
 import io.github.elkhoudiry.klogger.route.health.health
-import io.github.elkhoudiry.klogger.route.logs.log
+import io.github.elkhoudiry.klogger.route.logs.logs
 import io.github.elkhoudiry.klogger.server.core.errorResponse
 import io.github.elkhoudiry.klogger.server.data.common.models.ResourceNotFoundException
 import io.github.elkhoudiry.klogger.server.data.common.models.ResponseException
@@ -19,8 +20,9 @@ fun Application.configureRouting() {
     install(StatusPages) { exception<Throwable> { call, cause -> call.fail(cause) } }
     routing {
         get("/") { call.respondText("Hello Klogger!") }
+        events()
         health()
-        log()
+        logs()
     }
 }
 

@@ -12,6 +12,7 @@ import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.longOrNull
+import kotlin.reflect.KClass
 
 val JsonElement.arrayOrNull
     get() = try {
@@ -29,6 +30,12 @@ val JsonElement.objectOrNull
 
 fun JsonObject.stringOrReject(key: String): String {
     return (get(key) ?: missingProperty(key)).jsonPrimitive.stringOrNull ?: badRequest("Invalid $key")
+}
+
+fun <T : Enum<T>> JsonObject.stringOrReject(key: String, enum: KClass<T>): T {
+    val value = stringOrReject(key)
+    return enum.java.enumConstants.firstOrNull { it.name.equals(value, true) }
+        ?: badRequest("Invalid $key")
 }
 
 fun JsonObject.intOrReject(key: String): Int {

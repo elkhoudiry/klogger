@@ -1,20 +1,24 @@
-package io.github.elkhoudiry.server.data.logger.models
+package io.github.elkhoudiry.server.data.events.models
 
 import kotlinx.datetime.Clock
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
-class EventProperty(val id: String, val eventId: String, val name: String, val value: String)
-
+@Serializable
 data class Event(
     val type: Type,
     val description: String,
-    val context: List<EventProperty>,
+    val properties: List<EventProperty>,
     val id: String,
-    val level: LogLevel
-) {
-    val localDatetime: String = Clock.System
+    @SerialName("datetime")
+    val serverDateTime: String = Clock.System
         .now()
-        .toString()
+        .toString(),
 
+    @Transient
+    val clientDateTime: String = serverDateTime
+) {
     enum class Type {
         User {
             override fun toString(): String = "user"
@@ -51,3 +55,6 @@ data class Event(
         }
     }
 }
+
+@Serializable
+class EventProperty(val id: String, val name: String, val value: String)

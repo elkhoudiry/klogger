@@ -14,6 +14,7 @@ application {
 dependencies {
     compileOnly(project(":server-data-common"))
     compileOnly(project(":core-shared"))
+    compileOnly(project(":route-events"))
     compileOnly(project(":route-health"))
     compileOnly(project(":route-logs"))
 

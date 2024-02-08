@@ -4,5 +4,5 @@ plugins {
 
 dependencies {
     implementation(project(":route-common"))
-    implementation(project(":server-data-logs"))
+    implementation(project(":server-data-events"))
 }
