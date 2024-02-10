@@ -20,7 +20,7 @@ class CassandraDatabase(
     val keyspace: String = "klogger"
 ) {
     private val cassandra = CassandraConnector()
-    val logs  = lazy { LogsCassandraCache(cassandra.session, keyspace) }
+    val logs by lazy { LogsCassandraCache(cassandra.session, keyspace) }
 
     suspend fun connect() {
         initCassandra()

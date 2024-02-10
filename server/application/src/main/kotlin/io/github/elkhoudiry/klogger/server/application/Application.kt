@@ -5,7 +5,6 @@ import io.github.elkhoudiry.klogger.server.application.plugins.configureMonitori
 import io.github.elkhoudiry.klogger.server.application.plugins.configureRouting
 import io.github.elkhoudiry.klogger.server.application.plugins.configureSerialization
 import io.github.elkhoudiry.klogger.server.data.database.cassandra.CassandraDatabase
-import io.github.elkhoudiry.klogger.server.data.database.common.logs.LogsLocalCache
 import io.ktor.server.application.Application
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.jetty.Jetty
@@ -17,16 +16,15 @@ fun main() {
         .getenv("SERVER_PORT")
         ?.toInt() ?: 8080
 
-
     val cass = CassandraDatabase()
     runBlocking { cass.connect() }
 
     embeddedServer(Jetty, port = port, host = hostname, module = {
-        module(cass.logs)
+        module(cass)
     }).start(wait = true)
 }
 
-fun Application.module(local: Lazy<LogsLocalCache>) {
+fun Application.module(local: CassandraDatabase) {
     configureSerialization()
     configureMonitoring()
     configureHTTP()

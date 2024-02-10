@@ -3,7 +3,7 @@ package io.github.elkhoudiry.klogger.server.application.plugins
 import io.github.elkhoudiry.klogger.server.application.core.errorResponse
 import io.github.elkhoudiry.klogger.server.data.common.models.ResourceNotFoundException
 import io.github.elkhoudiry.klogger.server.data.common.models.ResponseException
-import io.github.elkhoudiry.klogger.server.data.database.common.logs.LogsLocalCache
+import io.github.elkhoudiry.klogger.server.data.database.cassandra.CassandraDatabase
 import io.github.elkhoudiry.klogger.server.data.logs.repositories.DefaultLoggerRepository
 import io.github.elkhoudiry.klogger.server.route.events.events
 import io.github.elkhoudiry.klogger.server.route.health.health
@@ -19,14 +19,14 @@ import io.ktor.server.routing.routing
 import io.netty.handler.codec.http.HttpResponseStatus
 
 fun Application.configureRouting(
-    logsLocalCache: Lazy<LogsLocalCache>
+    database: CassandraDatabase
 ) {
     install(StatusPages) { exception<Throwable> { call, cause -> call.fail(cause) } }
     routing {
         get("/") { call.respondText("Hello Klogger!") }
         events()
         health()
-        logs(DefaultLoggerRepository(logsLocalCache))
+        logs(DefaultLoggerRepository(database.logs))
     }
 }
 
@@ -49,7 +49,7 @@ private suspend fun ApplicationCall.fail(failure: Throwable) = when (failure) {
 
     else -> {
         errorResponse(
-            HttpResponseStatus.BAD_REQUEST.code(),
+            HttpResponseStatus.INTERNAL_SERVER_ERROR.code(),
             failure,
             failure.message
         )
