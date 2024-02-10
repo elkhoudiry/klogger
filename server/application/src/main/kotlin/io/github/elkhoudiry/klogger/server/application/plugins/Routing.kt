@@ -4,6 +4,7 @@ import io.github.elkhoudiry.klogger.server.application.core.errorResponse
 import io.github.elkhoudiry.klogger.server.data.common.models.ResourceNotFoundException
 import io.github.elkhoudiry.klogger.server.data.common.models.ResponseException
 import io.github.elkhoudiry.klogger.server.data.database.cassandra.CassandraDatabase
+import io.github.elkhoudiry.klogger.server.data.events.repositories.DefaultEventsRepository
 import io.github.elkhoudiry.klogger.server.data.logs.repositories.DefaultLoggerRepository
 import io.github.elkhoudiry.klogger.server.route.events.events
 import io.github.elkhoudiry.klogger.server.route.health.health
@@ -24,7 +25,7 @@ fun Application.configureRouting(
     install(StatusPages) { exception<Throwable> { call, cause -> call.fail(cause) } }
     routing {
         get("/") { call.respondText("Hello Klogger!") }
-        events()
+        events(DefaultEventsRepository(database.events))
         health()
         logs(DefaultLoggerRepository(database.logs))
     }

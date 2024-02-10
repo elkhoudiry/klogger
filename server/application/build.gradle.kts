@@ -14,6 +14,7 @@ application {
 dependencies {
     implementation(project(":server-data-common"))
     implementation(project(":server-data-database-cassandra"))
+    implementation(project(":server-data-events"))
     implementation(project(":server-data-logs"))
 
     implementation(project(":core-shared"))

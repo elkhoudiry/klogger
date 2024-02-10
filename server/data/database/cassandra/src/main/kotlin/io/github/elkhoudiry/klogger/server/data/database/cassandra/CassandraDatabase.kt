@@ -2,8 +2,9 @@ package io.github.elkhoudiry.klogger.server.data.database.cassandra
 
 import com.datastax.oss.driver.api.core.type.codec.registry.CodecRegistry
 import com.datastax.oss.driver.api.core.type.codec.registry.MutableCodecRegistry
+import io.github.elkhoudiry.klogger.server.data.database.cassandra.events.EventsCassandraCache
+import io.github.elkhoudiry.klogger.server.data.database.cassandra.events.codecs.EventPropertyCodec
 import io.github.elkhoudiry.klogger.server.data.database.cassandra.logs.LogsCassandraCache
-import io.github.elkhoudiry.klogger.server.data.database.cassandra.logs.codecs.LogPropertyCodec
 import io.github.elkhoudiry.realtime.cassandra.CassandraConnector
 import kotlinx.coroutines.delay
 import org.cognitor.cassandra.migration.Database
@@ -20,7 +21,9 @@ class CassandraDatabase(
     val keyspace: String = "klogger"
 ) {
     private val cassandra = CassandraConnector()
+
     val logs by lazy { LogsCassandraCache(cassandra.session, keyspace) }
+    val events by lazy { EventsCassandraCache(cassandra.session, keyspace) }
 
     suspend fun connect() {
         initCassandra()
@@ -53,7 +56,7 @@ class CassandraDatabase(
             .getUserDefinedType("log_property")
             .get()
 
-        val codec = LogPropertyCodec(CodecRegistry.DEFAULT.codecFor(type))
+        val codec = EventPropertyCodec(CodecRegistry.DEFAULT.codecFor(type))
 
         (cassandra.session.context.codecRegistry as MutableCodecRegistry).register(codec)
     }
