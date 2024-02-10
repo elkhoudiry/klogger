@@ -7,10 +7,10 @@ import kotlinx.serialization.Transient
 
 @Serializable
 data class Event(
+    val id: String,
     val type: Type,
     val description: String,
     val properties: List<EventProperty>,
-    val id: String,
     @SerialName("datetime")
     val serverDateTime: String = Clock.System
         .now()

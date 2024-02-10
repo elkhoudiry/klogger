@@ -3,21 +3,21 @@ package io.github.elkhoudiry.klogger.server.route.events.usecases
 import io.github.elkhoudiry.klogger.server.data.events.repositories.EventsRepository
 
 internal class EventsRouteUseCases(
-    events: EventsRepository
+    repository: EventsRepository
 ) {
     val insertLog = InsertEventUseCase(
-        events = events
+        events = repository
     )
 
     val getById = GetByIdUseCase(
-        events = events
+        events = repository
     )
 
     val getAll = GetAllUseCase(
-        events = events
+        events = repository
     )
 
     val deleteById = DeleteByIdUseCase(
-        events = events
+        events = repository
     )
 }
