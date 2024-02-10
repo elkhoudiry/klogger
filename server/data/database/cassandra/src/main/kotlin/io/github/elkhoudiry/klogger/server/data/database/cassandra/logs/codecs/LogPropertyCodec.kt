@@ -25,7 +25,6 @@ class LogPropertyCodec(private val innerCodec: TypeCodec<UdtValue>) : TypeCodec<
         return toAddress(innerCodec.decode(bytes, protocolVersion))
     }
 
-
     override fun encode(value: LogPropertyEntity?, protocolVersion: ProtocolVersion): ByteBuffer? {
         return innerCodec.encode(toUDTValue(value), protocolVersion)
     }

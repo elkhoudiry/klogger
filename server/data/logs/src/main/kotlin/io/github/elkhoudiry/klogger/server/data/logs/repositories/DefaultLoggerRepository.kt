@@ -1,23 +1,33 @@
 package io.github.elkhoudiry.klogger.server.data.logs.repositories
 
+import io.github.elkhoudiry.klogger.server.data.database.common.logs.LogsLocalCache
 import io.github.elkhoudiry.klogger.server.data.logs.models.Log
+import io.github.elkhoudiry.klogger.server.data.logs.models.toLog
+import io.github.elkhoudiry.klogger.server.data.logs.models.toLogEntity
 
-class DefaultLoggerRepository : LoggerRepository {
-    private val list = ArrayList<Log>()
+class DefaultLoggerRepository(
+    private val localCache: Lazy<LogsLocalCache>
+) : LoggerRepository {
 
-    override fun getAll(): List<Log> {
-        return list
+    override suspend fun getAll(): List<Log> {
+        return localCache
+            .value
+            .getAll()
+            .map { it.toLog() }
     }
 
-    override fun getById(id: String): Log? {
-        return list.find { it.id == id }
+    override suspend fun getById(id: String): Log? {
+        return localCache
+            .value
+            .getById(id)
+            ?.toLog()
     }
 
     override suspend fun insert(log: Log) {
-        list.add(log)
+        localCache.value.insert(log.toLogEntity())
     }
 
     override suspend fun deleteById(id: String): Boolean {
-        return list.removeIf { it.id == id }
+        return false
     }
 }

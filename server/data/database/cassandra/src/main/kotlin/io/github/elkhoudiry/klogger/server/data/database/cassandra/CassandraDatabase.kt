@@ -2,6 +2,7 @@ package io.github.elkhoudiry.klogger.server.data.database.cassandra
 
 import com.datastax.oss.driver.api.core.type.codec.registry.CodecRegistry
 import com.datastax.oss.driver.api.core.type.codec.registry.MutableCodecRegistry
+import io.github.elkhoudiry.klogger.server.data.database.cassandra.logs.LogsCassandraCache
 import io.github.elkhoudiry.klogger.server.data.database.cassandra.logs.codecs.LogPropertyCodec
 import io.github.elkhoudiry.realtime.cassandra.CassandraConnector
 import kotlinx.coroutines.delay
@@ -15,10 +16,11 @@ class CassandraDatabase(
     private val port: Int = System
         .getenv("CASSANDRA_PORT")
         ?.toInt() ?: 9042,
-    private val keyspace: String = "klogger",
     private val datacenter: String = "Seed",
+    val keyspace: String = "klogger"
 ) {
     private val cassandra = CassandraConnector()
+    val logs  = lazy { LogsCassandraCache(cassandra.session, keyspace) }
 
     suspend fun connect() {
         initCassandra()
@@ -31,10 +33,13 @@ class CassandraDatabase(
                 val database = Database(cassandra.session, keyspace)
                 val migration = MigrationTask(database, MigrationRepository())
                 migration.migrate()
-                cassandra.connect(hostname, port, datacenter)
                 initCodecs()
+
+                // Important to reopen the session after the migration
+                cassandra.connect(hostname, port, datacenter)
                 return
             } catch (ex: Exception) {
+                println("[ERROR] Cassandra connection failed: ${ex.message}")
                 if (it == 9) throw ex
                 delay(30.seconds.inWholeMilliseconds)
             }

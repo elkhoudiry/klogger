@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":server-data-database-common"))
-    implementation(klogger.realtime.cassandra)
-    implementation(klogger.cassandra.migration)
+    api(project(":server-data-database-common"))
+    api(klogger.realtime.cassandra)
+    api(klogger.cassandra.migration)
 }

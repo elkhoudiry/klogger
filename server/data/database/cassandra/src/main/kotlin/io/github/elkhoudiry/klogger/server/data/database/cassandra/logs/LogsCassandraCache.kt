@@ -6,8 +6,8 @@ import io.github.elkhoudiry.klogger.server.data.database.common.logs.LogsLocalCa
 import io.github.elkhoudiry.klogger.server.data.database.common.logs.models.LogEntity
 
 class LogsCassandraCache(
-    private val session: CqlSession,
-    private val keyspace: String
+    session: CqlSession,
+    keyspace: String
 ) : LogsLocalCache {
 
     private val useCases = LogsCassandraUseCases(
@@ -20,7 +20,8 @@ class LogsCassandraCache(
     }
 
     override suspend fun getById(id: String): LogEntity? {
-        TODO("Not yet implemented")
+        return useCases.getById
+            .execute(id)
     }
 
     override suspend fun insert(log: LogEntity) {

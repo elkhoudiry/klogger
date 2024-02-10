@@ -7,22 +7,26 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.withContext
 
-internal class GetAllUseCase(
+class GetByIdUseCase(
     private val session: CqlSession,
     private val keyspace: String,
     private val table: String
 ) {
     private val propertiesCodec = getPropertiesCodec(session, keyspace)
 
-    suspend fun execute(): List<LogEntity> = withContext(currentCoroutineContext() + Dispatchers.IO) {
+    suspend fun execute(
+        id: String
+    ): LogEntity? = withContext(currentCoroutineContext() + Dispatchers.IO) {
         val query = QueryBuilder
             .selectFrom(keyspace, table)
             .all()
+            .whereColumn("id")
+            .isEqualTo(QueryBuilder.literal(id))
 
         val result = session.execute(query.build())
 
         return@withContext result
             .map { row -> row.toModel(propertiesCodec) }
-            .all()
+            .one()
     }
 }

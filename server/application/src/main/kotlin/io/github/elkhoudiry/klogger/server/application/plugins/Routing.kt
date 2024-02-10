@@ -3,6 +3,8 @@ package io.github.elkhoudiry.klogger.server.application.plugins
 import io.github.elkhoudiry.klogger.server.application.core.errorResponse
 import io.github.elkhoudiry.klogger.server.data.common.models.ResourceNotFoundException
 import io.github.elkhoudiry.klogger.server.data.common.models.ResponseException
+import io.github.elkhoudiry.klogger.server.data.database.common.logs.LogsLocalCache
+import io.github.elkhoudiry.klogger.server.data.logs.repositories.DefaultLoggerRepository
 import io.github.elkhoudiry.klogger.server.route.events.events
 import io.github.elkhoudiry.klogger.server.route.health.health
 import io.github.elkhoudiry.klogger.server.route.logs.logs
@@ -16,13 +18,15 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import io.netty.handler.codec.http.HttpResponseStatus
 
-fun Application.configureRouting() {
+fun Application.configureRouting(
+    logsLocalCache: Lazy<LogsLocalCache>
+) {
     install(StatusPages) { exception<Throwable> { call, cause -> call.fail(cause) } }
     routing {
         get("/") { call.respondText("Hello Klogger!") }
         events()
         health()
-        logs()
+        logs(DefaultLoggerRepository(logsLocalCache))
     }
 }
 

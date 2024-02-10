@@ -8,5 +8,7 @@ internal class LogsCassandraUseCases(
 ) {
     val getAll = GetAllUseCase(session = session, keyspace = keyspace, table = "logs")
 
+    val getById = GetByIdUseCase(session = session, keyspace = keyspace, table = "logs")
+
     val insert = InsertUseCase(session, keyspace = keyspace, table = "logs")
 }
