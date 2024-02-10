@@ -10,6 +10,7 @@ androidxTestCoreKtx = "1.5.0"
 androidxTestRules = "1.5.0"
 androidxTestRunner = "1.5.2"
 auth0Mvc = "1.10.0"
+cassandraEmbedded = "4.1.0"
 cassandraMigration = "2.5.0_v4"
 cassandraUnit = "4.3.1.0"
 googlePlayServicesGradlePlugin = "4.3.15"
@@ -40,6 +41,7 @@ androidx-test-runner = { group = "androidx.test", name = "runner", version.ref =
 
 auth0-mvc = { group = "com.auth0", name = "mvc-auth-commons", version.ref = "auth0Mvc" }
 
+cassandra-embedded = { group = "com.github.nosan", name = "embedded-cassandra", version.ref = "cassandraEmbedded" }
 cassandra-migration = { group = "org.cognitor.cassandra", name = "cassandra-migration", version.ref = "cassandraMigration" }
 cassandra-unit = { group = "org.cassandraunit", name = "cassandra-unit", version.ref = "cassandraUnit" }
 ch-qos-logback = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }

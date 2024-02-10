@@ -40,6 +40,7 @@ dependencies {
 
     testImplementation(klogger.ktor.server.tests.jvm)
     testImplementation(klogger.kotlin.test)
+    testImplementation(klogger.cassandra.embedded)
 }
 
 java {

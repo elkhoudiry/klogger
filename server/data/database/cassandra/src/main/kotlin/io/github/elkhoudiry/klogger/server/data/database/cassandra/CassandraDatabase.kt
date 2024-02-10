@@ -29,6 +29,10 @@ class CassandraDatabase(
         initCassandra()
     }
 
+    suspend fun close() {
+        cassandra.close()
+    }
+
     private suspend fun initCassandra() {
         repeat(10) {
             try {

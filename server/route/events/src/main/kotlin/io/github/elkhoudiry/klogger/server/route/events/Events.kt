@@ -8,7 +8,6 @@ import io.github.elkhoudiry.klogger.server.route.events.usecases.EventsRouteUseC
 import io.ktor.server.application.call
 import io.ktor.server.routing.Routing
 
-
 fun Routing.events(
     repository: DefaultEventsRepository
 ) {
