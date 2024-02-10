@@ -30,3 +30,5 @@ hs_err_pid*.log
 
 gradle-user-home
 .env
+
+cassandra/volumes/cassandra*/data/*
