@@ -12,11 +12,15 @@ application {
 }
 
 dependencies {
-    compileOnly(project(":server-data-common"))
-    compileOnly(project(":core-shared"))
-    compileOnly(project(":server-route-events"))
-    compileOnly(project(":server-route-health"))
-    compileOnly(project(":server-route-logs"))
+    implementation(project(":server-data-common"))
+    implementation(project(":server-data-database-cassandra"))
+    implementation(project(":server-data-events"))
+    implementation(project(":server-data-logs"))
+
+    implementation(project(":core-shared"))
+    implementation(project(":server-route-events"))
+    implementation(project(":server-route-health"))
+    implementation(project(":server-route-logs"))
 
     implementation(klogger.ch.qos.logback)
     implementation(klogger.kotlinx.datetime)
