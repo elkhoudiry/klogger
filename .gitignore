@@ -32,3 +32,4 @@ gradle-user-home
 .env
 
 cassandra/volumes/cassandra*/data/*
+cassandra/volumes/cassandra*/etc/*
