@@ -5,14 +5,13 @@ data class LogEntity(
     val log: String,
     val type: String,
     val level: String,
-    val properties: List<LogProperty>,
+    val properties: List<LogPropertyEntity>,
     val serverDateTime: String,
     val clientDateTime: String
 )
 
-data class LogProperty(
+data class LogPropertyEntity(
     val id: String,
-    val logId: String,
     val name: String,
     val value: String
 )

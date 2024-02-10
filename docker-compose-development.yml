@@ -28,44 +28,44 @@ services:
             CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch
             CASSANDRA_NUM_TOKENS: 128
 
-    cassandra2:
-        image: cassandra:3.7
-        container_name: cassandra2
-        hostname: cassandra2
-        healthcheck:
-            test: [ "CMD", "cqlsh", "-e", "describe keyspaces" ]
-            interval: 5s
-            timeout: 5s
-            retries: 60
-        networks:
-            - cassandra
-        ports:
-            - "9043:9042"  # Expose native binary CQL port for your apps
-        volumes:
-            - ./cassandra/volumes/cassandra2/data:/var/lib/cassandra    # This is the volume that will persist data for cass1 node
-            - ./cassandra/volumes/cassandra2/etc:/etc/cassandra   # Use your own config files for full control
-        environment: *environment    # point to "environment" to use the same environment variables as cass1
-        depends_on:
-            cassandra1: # start cass2 only after cass1 is healthy
-                condition: service_healthy
-
-    cassandra3:
-        image: cassandra:3.7
-        container_name: cassandra3
-        hostname: cassandra3
-        healthcheck:
-            test: [ "CMD", "cqlsh", "-e", "describe keyspaces" ]
-            interval: 5s
-            timeout: 5s
-            retries: 60
-        networks:
-            - cassandra
-        ports:
-            - "9044:9042"  # Expose native binary CQL port for your apps
-        volumes:
-            - ./cassandra/volumes/cassandra3/data:/var/lib/cassandra    # This is the volume that will persist data for cass1 node
-            - ./cassandra/volumes/cassandra3/etc:/etc/cassandra   # Use your own config files for full control
-        environment: *environment    # point to "environment" to use the same environment variables as cass1
-        depends_on:
-            cassandra2: # start cass3 only after cass1 is healthy
-                condition: service_healthy
+#    cassandra2:
+#        image: cassandra:3.7
+#        container_name: cassandra2
+#        hostname: cassandra2
+#        healthcheck:
+#            test: [ "CMD", "cqlsh", "-e", "describe keyspaces" ]
+#            interval: 5s
+#            timeout: 5s
+#            retries: 60
+#        networks:
+#            - cassandra
+#        ports:
+#            - "9043:9042"  # Expose native binary CQL port for your apps
+#        volumes:
+#            - ./cassandra/volumes/cassandra2/data:/var/lib/cassandra    # This is the volume that will persist data for cass1 node
+#            - ./cassandra/volumes/cassandra2/etc:/etc/cassandra   # Use your own config files for full control
+#        environment: *environment    # point to "environment" to use the same environment variables as cass1
+#        depends_on:
+#            cassandra1: # start cass2 only after cass1 is healthy
+#                condition: service_healthy
+#
+#    cassandra3:
+#        image: cassandra:3.7
+#        container_name: cassandra3
+#        hostname: cassandra3
+#        healthcheck:
+#            test: [ "CMD", "cqlsh", "-e", "describe keyspaces" ]
+#            interval: 5s
+#            timeout: 5s
+#            retries: 60
+#        networks:
+#            - cassandra
+#        ports:
+#            - "9044:9042"  # Expose native binary CQL port for your apps
+#        volumes:
+#            - ./cassandra/volumes/cassandra3/data:/var/lib/cassandra    # This is the volume that will persist data for cass1 node
+#            - ./cassandra/volumes/cassandra3/etc:/etc/cassandra   # Use your own config files for full control
+#        environment: *environment    # point to "environment" to use the same environment variables as cass1
+#        depends_on:
+#            cassandra2: # start cass3 only after cass1 is healthy
+#                condition: service_healthy

@@ -1,19 +1,18 @@
-CREATE KEYSPACE IF NOT EXISTS klogger WITH REPLICATION = {'class':'NetworkTopologyStrategy', 'Seed':3};
+CREATE KEYSPACE IF NOT EXISTS klogger WITH REPLICATION = {'class':'SimpleStrategy', 'Seed':1};
 
 CREATE TABLE IF NOT EXISTS klogger.logs (
 id text,
 log text,
 type text,
 level text,
-server_date_time text,
-client_date_time text,
+properties list<frozen<klogger.log_property>>,
+server_datetime text,
+client_datetime text,
 PRIMARY KEY ((id), id)
 );
 
-CREATE TABLE IF NOT EXISTS klogger.logs_properties (
+CREATE TYPE IF NOT EXISTS klogger.log_property (
 id text,
-log_id text,
 name text,
-value text,
-PRIMARY KEY ((log_id), id)
+value text
 );
