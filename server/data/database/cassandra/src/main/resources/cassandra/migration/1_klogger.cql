@@ -1,4 +1,4 @@
-CREATE KEYSPACE IF NOT EXISTS klogger WITH REPLICATION = {'class':'NetworkTopologyStrategy', 'Seed':3};
+CREATE KEYSPACE IF NOT EXISTS klogger WITH REPLICATION = {'class':'SimpleStrategy', 'replication_factor' : 1};
 
 CREATE TYPE IF NOT EXISTS klogger.log_property (
 id text,
